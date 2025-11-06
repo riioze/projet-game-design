@@ -1,5 +1,6 @@
-[gd_scene load_steps=7 format=4 uid="uid://cjybu4pkgcmh4"]
+[gd_scene load_steps=8 format=4 uid="uid://cjybu4pkgcmh4"]
 
+[ext_resource type="Script" uid="uid://kprxyvt7604n" path="res://Scripts/main.gd" id="1_303kh"]
 [ext_resource type="Texture2D" uid="uid://b8f00nirsdfav" path="res://beach-tile-map.png" id="1_cggrx"]
 [ext_resource type="Texture2D" uid="uid://bqd61j4hc75fq" path="res://bernard.png" id="2_tin33"]
 [ext_resource type="Script" uid="uid://dgv7gnt4pac37" path="res://Scripts/player.gd" id="2_txjyh"]
@@ -281,22 +282,24 @@ sources/0 = SubResource("TileSetAtlasSource_tin33")
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_txjyh"]
 size = Vector2(8, 20)
 
-[node name="Node2D" type="Node2D"]
+[node name="Node2D" type="Node2D" node_paths=PackedStringArray("player")]
+script = ExtResource("1_303kh")
+player = NodePath("player")
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
 scale = Vector2(7.99, 7.99)
 tile_map_data = PackedByteArray("AAAAAAAAAAAAAAUAAAABAAAAAAABAAUAAAACAAAAAAABAAUAAAADAAAAAAABAAUAAAACAAEAAAACAAcAAAABAAEAAAABAAcAAAAAAAEAAAAGAAUAAAADAAEAAAACAAgAAAAAAAIAAAAGAAYAAAABAAIAAAAFAAgAAAACAAIAAAAFAAgAAAADAAIAAAACAAcAAAAEAAIAAAABAAcAAAAEAAMAAAAEAAgAAAAFAAMAAAADAAgAAAAEAAEAAAAAAAkAAAAEAAAAAAACAAUAAAAFAAAAAAABAAUAAAAFAAEAAAAEAAgAAAAFAAIAAAABAAgAAAABAAMAAAABAAcAAAAAAAMAAAAGAAUAAAACAAMAAAAFAAgAAAADAAMAAAAAAAkAAAAIAAIAAAAHAAUAAAAHAAIAAAAAAAgAAAAHAAMAAAAAAAkAAAAIAAMAAAAHAAUAAAAGAAIAAAAEAAgAAAAGAAMAAAAFAAcAAAAGAAEAAAADAAgAAAAGAAAAAAABAAUAAAAHAAAAAAACAAUAAAAIAAAAAAADAAUAAAAIAAEAAAAHAAUAAAAHAAEAAAAAAAkAAAAAAAQAAAAAAAYAAAABAAQAAAABAAYAAAACAAQAAAACAAYAAAADAAQAAAACAAYAAAAEAAQAAAACAAYAAAAFAAQAAAABAAYAAAAGAAQAAAABAAYAAAAHAAQAAAACAAYAAAAIAAQAAAADAAYAAAA=")
 tile_set = SubResource("TileSet_xeufp")
 
-[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+[node name="player" type="CharacterBody2D" parent="."]
 position = Vector2(316, 275)
 scale = Vector2(4, 4)
 script = ExtResource("2_txjyh")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="player"]
 position = Vector2(0, 2)
 shape = SubResource("RectangleShape2D_txjyh")
 
-[node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D"]
+[node name="Sprite2D" type="Sprite2D" parent="player"]
 scale = Vector2(0.125, 0.125)
 texture = ExtResource("2_tin33")

@@ -1,8 +1,16 @@
 extends CharacterBody2D
+class_name Player
+
+
+const Mob = preload("res://Scripts/mob.gd");
+const MobControler = preload("res://Scripts/mob_controler.gd");
 
 var Max_Speed = 900.0;
 var acceleration = 900.0;
 var deceleration_factor = 0.9;
+
+@export var number_of_sheels : int = 0;
+@export var mob_controler : MobControler;
 
 func _physics_process(delta: float) -> void:
 	var input_vector = Vector2.ZERO;
@@ -18,3 +26,8 @@ func _physics_process(delta: float) -> void:
 	rotation = velocity.angle()+PI/2;
 	
 	move_and_slide();
+	
+
+
+func hit(enemy : Mob):
+	enemy.get_hit(10.0);
