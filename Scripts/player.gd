@@ -1,14 +1,20 @@
 extends CharacterBody2D
 
-var Max_Speed = 20.0;
+var Max_Speed = 900.0;
+var acceleration = 900.0;
+var deceleration_factor = 0.9;
 
 func _physics_process(delta: float) -> void:
 	var input_vector = Vector2.ZERO;
 	input_vector.x = Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left");
 	input_vector.y = Input.get_action_strength("ui_down") - Input.get_action_strength("ui_up");
 	
-	velocity = input_vector.normalized()*Max_Speed;
+	velocity*=deceleration_factor
 	
-	print(velocity);
+	velocity += input_vector.normalized()*acceleration*delta;
+	
+	velocity.clampf(0.0,Max_Speed);
+	
+	rotation = velocity.angle()+PI/2;
 	
 	move_and_slide();
