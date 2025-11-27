@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=4 uid="uid://cjybu4pkgcmh4"]
+[gd_scene load_steps=12 format=4 uid="uid://cjybu4pkgcmh4"]
 
 [ext_resource type="Texture2D" uid="uid://b8f00nirsdfav" path="res://beach-tile-map.png" id="1_cggrx"]
-[ext_resource type="Texture2D" uid="uid://bqd61j4hc75fq" path="res://bernard.png" id="2_tin33"]
+[ext_resource type="Texture2D" uid="uid://qdsdet22yd0x" path="res://bernard.png" id="2_tin33"]
 [ext_resource type="Script" uid="uid://dgv7gnt4pac37" path="res://Scripts/player.gd" id="2_txjyh"]
+[ext_resource type="Script" uid="uid://bbwserx8sv7du" path="res://enemy.gd" id="4_81mb1"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_tin33"]
 texture = ExtResource("1_cggrx")
@@ -279,24 +280,88 @@ terrain_set_0/terrain_0/color = Color(0.5, 0.34375, 0.25, 1)
 sources/0 = SubResource("TileSetAtlasSource_tin33")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_txjyh"]
-size = Vector2(8, 20)
+size = Vector2(29.75, 18.25)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_81mb1"]
+size = Vector2(512, 44)
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_303kh"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_303kh"]
+size = Vector2(111.5, 70)
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_bq8a2"]
 
 [node name="Node2D" type="Node2D"]
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
 scale = Vector2(7.99, 7.99)
-tile_map_data = PackedByteArray("AAAAAAAAAAAAAAUAAAABAAAAAAABAAUAAAACAAAAAAABAAUAAAADAAAAAAABAAUAAAACAAEAAAACAAcAAAABAAEAAAABAAcAAAAAAAEAAAAGAAUAAAADAAEAAAACAAgAAAAAAAIAAAAGAAYAAAABAAIAAAAFAAgAAAACAAIAAAAFAAgAAAADAAIAAAACAAcAAAAEAAIAAAABAAcAAAAEAAMAAAAEAAgAAAAFAAMAAAADAAgAAAAEAAEAAAAAAAkAAAAEAAAAAAACAAUAAAAFAAAAAAABAAUAAAAFAAEAAAAEAAgAAAAFAAIAAAABAAgAAAABAAMAAAABAAcAAAAAAAMAAAAGAAUAAAACAAMAAAAFAAgAAAADAAMAAAAAAAkAAAAIAAIAAAAHAAUAAAAHAAIAAAAAAAgAAAAHAAMAAAAAAAkAAAAIAAMAAAAHAAUAAAAGAAIAAAAEAAgAAAAGAAMAAAAFAAcAAAAGAAEAAAADAAgAAAAGAAAAAAABAAUAAAAHAAAAAAACAAUAAAAIAAAAAAADAAUAAAAIAAEAAAAHAAUAAAAHAAEAAAAAAAkAAAAAAAQAAAAAAAYAAAABAAQAAAABAAYAAAACAAQAAAACAAYAAAADAAQAAAACAAYAAAAEAAQAAAACAAYAAAAFAAQAAAABAAYAAAAGAAQAAAABAAYAAAAHAAQAAAACAAYAAAAIAAQAAAADAAYAAAA=")
+tile_map_data = PackedByteArray("AAAAAAAAAAAAAAUAAAABAAAAAAABAAUAAAACAAAAAAABAAUAAAADAAAAAAABAAUAAAACAAEAAAACAAcAAAABAAEAAAABAAcAAAAAAAEAAAAGAAUAAAADAAEAAAACAAgAAAAAAAIAAAAGAAYAAAABAAIAAAAFAAgAAAACAAIAAAAFAAgAAAADAAIAAAACAAcAAAAEAAIAAAABAAcAAAAEAAMAAAAEAAgAAAAFAAMAAAADAAgAAAAEAAEAAAAAAAkAAAAEAAAAAAACAAUAAAAFAAAAAAABAAUAAAAFAAEAAAAEAAgAAAAFAAIAAAABAAgAAAABAAMAAAABAAcAAAAAAAMAAAAGAAUAAAACAAMAAAAFAAgAAAADAAMAAAAAAAkAAAAIAAIAAAAAAAgAAAAHAAIAAAAAAAkAAAAHAAMAAAAEAAgAAAAIAAMAAAAAAAkAAAAGAAIAAAAFAAcAAAAGAAMAAAAFAAcAAAAGAAEAAAADAAgAAAAGAAAAAAABAAUAAAAHAAAAAAACAAUAAAAIAAAAAAACAAUAAAAIAAEAAAADAAgAAAAHAAEAAAAEAAcAAAAAAAQAAAAAAAYAAAABAAQAAAABAAcAAAACAAQAAAACAAcAAAADAAQAAAADAAgAAAAEAAQAAAACAAgAAAAFAAQAAAAEAAgAAAAGAAQAAAAEAAgAAAAHAAQAAAAEAAgAAAAIAAQAAAACAAcAAAAAAAUAAAAAAAYAAAABAAUAAAADAAcAAAACAAUAAAAFAAcAAAADAAUAAAAAAAgAAAAEAAUAAAAAAAkAAAAFAAUAAAABAAgAAAAGAAUAAAADAAgAAAAHAAUAAAABAAcAAAAIAAUAAAADAAcAAAAJAAUAAAAAAAkAAAAJAAQAAAAAAAcAAAAJAAMAAAABAAgAAAAJAAIAAAAEAAgAAAAJAAEAAAAAAAgAAAAJAAAAAAACAAUAAAAKAAAAAAACAAUAAAAKAAEAAAAAAAgAAAAKAAIAAAAAAAcAAAAKAAMAAAADAAgAAAAKAAQAAAADAAcAAAAKAAUAAAAAAAgAAAALAAAAAAABAAUAAAALAAEAAAAEAAcAAAALAAIAAAADAAgAAAALAAMAAAADAAgAAAALAAQAAAADAAcAAAALAAUAAAABAAgAAAAAAAYAAAAAAAYAAAABAAYAAAACAAYAAAACAAYAAAACAAYAAAADAAYAAAACAAYAAAAEAAYAAAACAAYAAAAFAAYAAAAAAAcAAAAGAAYAAAAEAAgAAAAHAAYAAAADAAgAAAAIAAYAAAAEAAcAAAAJAAYAAAACAAgAAAAKAAYAAAAAAAkAAAALAAYAAAAEAAcAAAAGAAcAAAABAAYAAAAJAAcAAAACAAYAAAAKAAcAAAABAAYAAAALAAcAAAACAAYAAAAIAAcAAAACAAYAAAAHAAcAAAACAAYAAAAFAAcAAAAAAAYAAAAMAAQAAAADAAUAAAAMAAUAAAADAAUAAAAMAAYAAAADAAUAAAAMAAcAAAADAAYAAAAMAAMAAAADAAYAAAAMAAIAAAADAAUAAAAMAAEAAAADAAUAAAAMAAAAAAADAAUAAAA=")
 tile_set = SubResource("TileSet_xeufp")
 
-[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+[node name="Player" type="CharacterBody2D" parent="."]
 position = Vector2(316, 275)
 scale = Vector2(4, 4)
 script = ExtResource("2_txjyh")
+GRAVITY = 400.0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
-position = Vector2(0, 2)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
+position = Vector2(1.125, 1.125)
 shape = SubResource("RectangleShape2D_txjyh")
 
-[node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D"]
+[node name="sprite" type="Sprite2D" parent="Player"]
 scale = Vector2(0.125, 0.125)
 texture = ExtResource("2_tin33")
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+
+[node name="plateforms" type="Node2D" parent="."]
+
+[node name="plateforme" type="StaticBody2D" parent="plateforms"]
+position = Vector2(500, 400)
+scale = Vector2(2.03, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="plateforms/plateforme"]
+shape = SubResource("RectangleShape2D_81mb1")
+
+[node name="Sprite2D" type="Sprite2D" parent="plateforms/plateforme"]
+position = Vector2(-0.5, -0.99999046)
+scale = Vector2(511, 44.00001)
+texture = SubResource("PlaceholderTexture2D_303kh")
+
+[node name="plateforme2" type="StaticBody2D" parent="plateforms"]
+position = Vector2(1000, 800)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="plateforms/plateforme2"]
+shape = SubResource("RectangleShape2D_81mb1")
+
+[node name="Sprite2D" type="Sprite2D" parent="plateforms/plateforme2"]
+position = Vector2(-0.5, -0.99999046)
+scale = Vector2(511, 44.00001)
+texture = SubResource("PlaceholderTexture2D_303kh")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="plateforms"]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="plateforms/StaticBody2D"]
+position = Vector2(534, 195)
+polygon = PackedVector2Array(-617, 1177, 630, 1033, 630, 1033, 933, 1008, 933, 829, 105, 829, 96, 703, -535, 707, -538, -191, 1130, -200, 1121, 838, 1130, 1022, 1452, 1008, 1475, -352, -731, -439, -626, 895)
+
+[node name="enemy" type="CharacterBody2D" parent="." node_paths=PackedStringArray("player")]
+position = Vector2(63.22, 0)
+scale = Vector2(0.23, 0.23)
+script = ExtResource("4_81mb1")
+player = NodePath("../Player")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="enemy"]
+scale = Vector2(2.98, 2.98)
+shape = SubResource("RectangleShape2D_303kh")
+
+[node name="Sprite2D" type="Sprite2D" parent="enemy"]
+scale = Vector2(334, 206.00002)
+texture = SubResource("PlaceholderTexture2D_bq8a2")
+
+[node name="TextEdit" type="TextEdit" parent="."]
+offset_left = 17.0
+offset_right = 25.0
+offset_bottom = 8.0
+text = "GO DOWN HERE"

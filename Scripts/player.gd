@@ -1,20 +1,25 @@
 extends CharacterBody2D
+class_name Player
+@export var GRAVITY = 200.0
+@export var WALK_SPEED = 200
 
-var Max_Speed = 900.0;
-var acceleration = 900.0;
-var deceleration_factor = 0.9;
+var sprite : Sprite2D
 
-func _physics_process(delta: float) -> void:
-	var input_vector = Vector2.ZERO;
-	input_vector.x = Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left");
-	input_vector.y = Input.get_action_strength("ui_down") - Input.get_action_strength("ui_up");
-	
-	velocity*=deceleration_factor
-	
-	velocity += input_vector.normalized()*acceleration*delta;
-	
-	velocity.clampf(0.0,Max_Speed);
-	
-	rotation = velocity.angle()+PI/2;
-	
-	move_and_slide();
+func _ready() -> void:
+	sprite = $sprite
+
+func _physics_process(delta):
+	velocity.y += delta * GRAVITY
+
+	if Input.is_action_pressed("ui_left"):
+		velocity.x = -WALK_SPEED
+		sprite.flip_h = true
+		
+	elif Input.is_action_pressed("ui_right"):
+		velocity.x =  WALK_SPEED
+		sprite.flip_h = false
+	else:
+		velocity.x = 0
+
+	# "move_and_slide" already takes delta time into account.
+	move_and_slide()
