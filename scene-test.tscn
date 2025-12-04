@@ -1,9 +1,11 @@
-[gd_scene load_steps=12 format=4 uid="uid://cjybu4pkgcmh4"]
+[gd_scene load_steps=14 format=4 uid="uid://cjybu4pkgcmh4"]
 
+[ext_resource type="Script" uid="uid://dbnxn3iu1sy8k" path="res://life.gd" id="1_bq8a2"]
 [ext_resource type="Texture2D" uid="uid://b8f00nirsdfav" path="res://beach-tile-map.png" id="1_cggrx"]
 [ext_resource type="Texture2D" uid="uid://qdsdet22yd0x" path="res://bernard.png" id="2_tin33"]
 [ext_resource type="Script" uid="uid://dgv7gnt4pac37" path="res://Scripts/player.gd" id="2_txjyh"]
 [ext_resource type="Script" uid="uid://bbwserx8sv7du" path="res://enemy.gd" id="4_81mb1"]
+[ext_resource type="Texture2D" uid="uid://bg7dli4a02w27" path="res://fleche.jpg" id="5_303kh"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_tin33"]
 texture = ExtResource("1_cggrx")
@@ -300,10 +302,9 @@ tile_map_data = PackedByteArray("AAAAAAAAAAAAAAUAAAABAAAAAAABAAUAAAACAAAAAAABAAU
 tile_set = SubResource("TileSet_xeufp")
 
 [node name="Player" type="CharacterBody2D" parent="."]
-position = Vector2(316, 275)
+position = Vector2(483, 322)
 scale = Vector2(4, 4)
 script = ExtResource("2_txjyh")
-GRAVITY = 400.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
 position = Vector2(1.125, 1.125)
@@ -314,6 +315,20 @@ scale = Vector2(0.125, 0.125)
 texture = ExtResource("2_tin33")
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
+zoom = Vector2(0.5, 0.5)
+
+[node name="GUI" type="Node2D" parent="Player/Camera2D"]
+position = Vector2(-79, -68.75)
+scale = Vector2(0.25, 0.25)
+
+[node name="Label" type="Label" parent="Player/Camera2D/GUI" node_paths=PackedStringArray("player")]
+top_level = true
+offset_right = 40.0
+offset_bottom = 23.0
+scale = Vector2(9.195272, 8.305432)
+text = "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+script = ExtResource("1_bq8a2")
+player = NodePath("../../..")
 
 [node name="plateforms" type="Node2D" parent="."]
 
@@ -347,7 +362,7 @@ position = Vector2(534, 195)
 polygon = PackedVector2Array(-617, 1177, 630, 1033, 630, 1033, 933, 1008, 933, 829, 105, 829, 96, 703, -535, 707, -538, -191, 1130, -200, 1121, 838, 1130, 1022, 1452, 1008, 1475, -352, -731, -439, -626, 895)
 
 [node name="enemy" type="CharacterBody2D" parent="." node_paths=PackedStringArray("player")]
-position = Vector2(63.22, 0)
+position = Vector2(64.22, 354)
 scale = Vector2(0.23, 0.23)
 script = ExtResource("4_81mb1")
 player = NodePath("../Player")
@@ -360,8 +375,8 @@ shape = SubResource("RectangleShape2D_303kh")
 scale = Vector2(334, 206.00002)
 texture = SubResource("PlaceholderTexture2D_bq8a2")
 
-[node name="TextEdit" type="TextEdit" parent="."]
-offset_left = 17.0
-offset_right = 25.0
-offset_bottom = 8.0
-text = "GO DOWN HERE"
+[node name="Arrow" type="Sprite2D" parent="."]
+position = Vector2(1558.0001, 728)
+rotation = -1.57763
+scale = Vector2(-0.6892366, -0.39594883)
+texture = ExtResource("5_303kh")
